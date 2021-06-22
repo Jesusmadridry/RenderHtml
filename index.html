@@ -152,6 +152,10 @@
             <td width="25%"></td>
         </tr>
     </table>
+
+
+    
+
     <div id="grafico">
         <div class="col-md-8 grid-margin stretch-card">
             <div class="card border-bottom-0">
@@ -175,7 +179,7 @@
                         </div>
                         <div class="mt-3">
                             <p class="text-muted">Feedbacks</p>
-                            <h3 id="feedbacksValue">509</h3>
+                            <h3 id="feedbacksValue">1000</h3>
                         </div>
                     </div>
                 </div>
@@ -186,7 +190,37 @@
     <table class="mytable mytable-body">
         <tr id="graph1">
             <td width="50%">
+                
 
+                <div class="col-md-8 grid-margin stretch-card">
+                    <div class="card border-bottom-0">
+                        <div class="card-body pb-0">
+                            <p class="card-title">Purchases</p>
+                            <p class="text-muted font-weight-light">The argument in favor of using filler text
+                                goes something like this: If you use real content in the design process, anytime
+                                you reach a review</p>
+                            <div class="d-flex flex-wrap mb-5">
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">Status</p>
+                                    <h3>362</h3>
+                                </div>
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">New users</p>
+                                    <h3>187</h3>
+                                </div>
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">Chats</p>
+                                    <h3>524</h3>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="text-muted">Feedbacks</p>
+                                    <h3>1500</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="graphSuccess" class="w-100"></canvas>
+                    </div>
+                </div>
             </td>
             <td width="50%">
                 <div class="col-md-8 grid-margin stretch-card">
@@ -322,12 +356,18 @@
 </script>
 <script>
     window.onload = () => {
+
+
+        const dataGraph =  {cv1:[10, 50, 200, 80, 40, 60, 60], cv2: [175, 145, 80, 130, 240, 160, 120]}
+        renderGraph(dataGraph, 'graphSuccess')
+
+
         console.log('onload');
         const list = document.querySelector('#list');
         const graph = document.querySelector('#graph1');
         const graph2 = document.querySelector('#graph2');
         const report = document.querySelector('#report');
-        document.getElementById('feedbacksValue').innerHTML = '1000';
+        document.getElementById('feedbacksValue').innerHTML = 'qqq';
         console.log('list.childElementCount: ', list.childElementCount);
         console.log('graph.childElementCount: ', graph.childElementCount);
         console.log('report.childElementCount: ', report.childElementCount);
@@ -342,6 +382,101 @@
         console.log('position: ', list);
 
     }
+
+    const renderGraph = (dataGraph, containerId) =>{
+
+        if ($(`#${containerId}`).length) {
+      var areaData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        datasets: [
+          {
+            data: dataGraph.cv1,
+            backgroundColor: [
+              'rgba(255, 100, 2, .8)'
+            ],
+            borderColor: [
+              'transparent'
+            ],
+            borderWidth:3,
+            fill: 'origin',
+            label: "services"
+          },
+          {
+            data: dataGraph.cv2,
+            backgroundColor: [
+              'rgba(245, 166, 35, 1)'
+            ],
+            borderColor: [
+              'transparent'
+            ],
+            borderWidth:3,
+            fill: 'origin',
+            label: "purchases"
+          }
+        ]
+      };
+      var areaOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          filler: {
+            propagate: false
+          }
+        },
+        scales: {
+          xAxes: [{
+            display: false,
+            ticks: {
+              display: true
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false,
+              color: 'transparent',
+              zeroLineColor: '#eeeeee'
+            }
+          }],
+          yAxes: [{
+            display: false,
+            ticks: {
+              display: true,
+              autoSkip: false,
+              maxRotation: 0,
+              stepSize: 100,
+              min: 0,
+              max: 260
+            },
+            gridLines: {
+              drawBorder: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        },
+        elements: {
+          line: {
+            tension: .45
+          },
+          point: {
+            radius: 0
+          }
+        }
+      }
+      var salesChartCanvas = $(`#${containerId}`).get(0).getContext("2d");
+      var salesChart = new Chart(salesChartCanvas, {
+        type: 'line',
+        data: areaData,
+        options: areaOptions
+      });
+    }
+
+
+    }
+
 
     //EL X Sería la posición de ubicación.
     const addSquare = (x, y, container, title = "Title", subtitle = "Subtitle") => {
