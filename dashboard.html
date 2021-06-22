@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DSB</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/resources/royalui/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/resources/royalui/vendors/base/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/resources/royalui/css/style.css">
+
+    <script type="text/javascript" src="/resources/jquery/resources/external/jquery.bgiframe-2.1.2.js"></script>
+    <script type="text/javascript" src="/resources/jquery/resources/external/jquery.multiselect.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/3invest.css">
+
+
+    <style type="text/css">
+        /* Chart.js */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title mb-0">Top Products</p>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Product</th>
+                                <th>Sale</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jacob</td>
+                                <td>Photoshop</td>
+                                <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
+                                <td><label class="badge badge-danger">Pending</label></td>
+                            </tr>
+                            <tr>
+                                <td>Messsy</td>
+                                <td>Flash</td>
+                                <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                                <td><label class="badge badge-warning">In progress</label></td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>Premier</td>
+                                <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
+                                <td><label class="badge badge-info">Fixed</label></td>
+                            </tr>
+                            <tr>
+                                <td>Peter</td>
+                                <td>After effects</td>
+                                <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
+                                <td><label class="badge badge-success">Completed</label></td>
+                            </tr>
+                            <tr>
+                                <td>Dave</td>
+                                <td>53275535</td>
+                                <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
+                                <td><label class="badge badge-warning">In progress</label></td>
+                            </tr>
+                            <tr>
+                                <td>Messsy</td>
+                                <td>Flash</td>
+                                <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                                <td><label class="badge badge-info">Fixed</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div class="col-md-4 grid-margin stretch-card">
+        <div class="card border-bottom-0">
+            <div class="card-body pb-0">
+                <p class="card-title">Purchases</p>
+                <p class="text-muted font-weight-light">The argument in favor of using filler text
+                    goes something like this: If you use real content in the design process, anytime
+                    you reach a review</p>
+                <div class="d-flex flex-wrap mb-5">
+                    <div class="mr-5 mt-3">
+                        <p class="text-muted">Status</p>
+                        <h3>362</h3>
+                    </div>
+                    <div class="mr-5 mt-3">
+                        <p class="text-muted">New users</p>
+                        <h3>187</h3>
+                    </div>
+                    <div class="mr-5 mt-3">
+                        <p class="text-muted">Chats</p>
+                        <h3>524</h3>
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-muted">Feedbacks</p>
+                        <h3>509</h3>
+                    </div>
+                </div>
+            </div>
+            <canvas id="order-chart" class="w-100"></canvas>
+        </div>
+    </div>
+    
+    <div class="container-scroller">
+        <!-- partial -->
+        
+        <!-- <div class="container-fluid page-body-wrapper"> -->
+            <!-- partial:partials/_sidebar.html -->
+            <!-- partial -->
+            
+            <!-- <div class="main-panel">
+                
+                <div class="content-wrapper">
+                    
+                    <div class="row">
+                        <div class="col-md-4 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Sales details</p>
+                                    <p class="text-muted font-weight-light">Received overcame oh sensible so at an.
+                                        Formed do change merely to county it. Am separate contempt domestic to to oh. On
+                                        relation my so addition branched.</p>
+                                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                                    <canvas id="sales-chart"></canvas>
+                                </div>
+                                <div class="card border-right-0 border-left-0 border-bottom-0">
+                                    <div class="d-flex justify-content-center justify-content-md-end">
+                                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                            <button
+                                                class="btn btn-lg btn-outline-light dropdown-toggle rounded-0 border-top-0 border-bottom-0"
+                                                type="button" id="dropdownMenuDate2" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="true">
+                                                Today
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="dropdownMenuDate2">
+                                                <a class="dropdown-item" href="#">January - March</a>
+                                                <a class="dropdown-item" href="#">March - June</a>
+                                                <a class="dropdown-item" href="#">June - August</a>
+                                                <a class="dropdown-item" href="#">August - November</a>
+                                            </div>
+                                        </div>
+                                        <button
+                                            class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block"
+                                            type="button"> View all </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 grid-margin stretch-card">
+                            <div class="card border-bottom-0">
+                                <div class="card-body pb-0">
+                                    <p class="card-title">Purchases</p>
+                                    <p class="text-muted font-weight-light">The argument in favor of using filler text
+                                        goes something like this: If you use real content in the design process, anytime
+                                        you reach a review</p>
+                                    <div class="d-flex flex-wrap mb-5">
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Status</p>
+                                            <h3>362</h3>
+                                        </div>
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">New users</p>
+                                            <h3>187</h3>
+                                        </div>
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Chats</p>
+                                            <h3>524</h3>
+                                        </div>
+                                        <div class="mt-3">
+                                            <p class="text-muted">Feedbacks</p>
+                                            <h3>509</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <canvas id="order-chart" class="w-100"></canvas>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+
+                    <!-- <div class="row">
+                        <div class="col-md-4 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title mb-0">Top Products</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>User</th>
+                                                    <th>Product</th>
+                                                    <th>Sale</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Jacob</td>
+                                                    <td>Photoshop</td>
+                                                    <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
+                                                    <td><label class="badge badge-danger">Pending</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Messsy</td>
+                                                    <td>Flash</td>
+                                                    <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                                                    <td><label class="badge badge-warning">In progress</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Premier</td>
+                                                    <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
+                                                    <td><label class="badge badge-info">Fixed</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Peter</td>
+                                                    <td>After effects</td>
+                                                    <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
+                                                    <td><label class="badge badge-success">Completed</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dave</td>
+                                                    <td>53275535</td>
+                                                    <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
+                                                    <td><label class="badge badge-warning">In progress</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Messsy</td>
+                                                    <td>Flash</td>
+                                                    <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                                                    <td><label class="badge badge-info">Fixed</label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-md-4 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title">To Do Lists</h4>
+                                                <div class="list-wrapper pt-2">
+                                                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                                                        <li>
+                                                            <div class="form-check form-check-flat">
+                                                                <label class="form-check-label">
+                                                                    <input class="checkbox" type="checkbox">
+                                                                    Become A Travel Pro In One Easy Lesson
+                                                                </label>
+                                                            </div>
+                                                            <i class="remove ti-trash"></i>
+                                                        </li>
+                                                        <li class="completed">
+                                                            <div class="form-check form-check-flat">
+                                                                <label class="form-check-label">
+                                                                    <input class="checkbox" type="checkbox" checked>
+                                                                    See The Unmatched Beauty Of The Great Lakes
+                                                                </label>
+                                                            </div>
+                                                            <i class="remove ti-trash"></i>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check form-check-flat">
+                                                                <label class="form-check-label">
+                                                                    <input class="checkbox" type="checkbox">
+                                                                    Copper Canyon
+                                                                </label>
+                                                            </div>
+                                                            <i class="remove ti-trash"></i>
+                                                        </li>
+                                                        <li class="completed">
+                                                            <div class="form-check form-check-flat">
+                                                                <label class="form-check-label">
+                                                                    <input class="checkbox" type="checkbox" checked>
+                                                                    Top Things To See During A Holiday In Hong Kong
+                                                                </label>
+                                                            </div>
+                                                            <i class="remove ti-trash"></i>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check form-check-flat">
+                                                                <label class="form-check-label">
+                                                                    <input class="checkbox" type="checkbox">
+                                                                    Travelagent India
+                                                                </label>
+                                                            </div>
+                                                            <i class="remove ti-trash"></i>
+                                                        </li>
+                                                    </ul>
+                              </div> -->
+
+                        <!-- <div class="add-items d-flex mb-0 mt-4">
+                            <input type="text" class="form-control todo-list-input mr-2" placeholder="Add new task">
+                            <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
+                                    class="ti-location-arrow"></i></button>
+                        </div> -->
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div>
+</body>
+
+</html>
+
+<!-- plugins:js -->
+<script src="/royalui/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script src="/royalui/vendors/chart.js/Chart.min.js"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="/royalui/js/off-canvas.js"></script>
+<script src="/royalui/js/hoverable-collapse.js"></script>
+<script src="/royalui/js/template.js"></script>
+<script src="/royalui/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="/royalui/js/dashboard.js"></script>
+
+<script type="text/javascript">
+    // Benchmark Switch
+    window.onload = () => {
+        console.log('javascript');
+        let card = document.createRange().createContextualFragment(`<div class="col-md-8 grid-margin stretch-card">
+                    <div class="card border-bottom-0">
+                        <div class="card-body pb-0">
+                            <p class="card-title">Purchases</p>
+                            <p class="text-muted font-weight-light">The argument in favor of using filler text
+                                goes something like this: If you use real content in the design process, anytime
+                                you reach a review</p>
+                            <div class="d-flex flex-wrap mb-5">
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">Status</p>
+                                    <h3>362</h3>
+                                </div>
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">New users</p>
+                                    <h3>187</h3>
+                                </div>
+                                <div class="mr-5 mt-3">
+                                    <p class="text-muted">Chats</p>
+                                    <h3>524</h3>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="text-muted">Feedbacks</p>
+                                    <h3>509</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="order-chart" class="w-100"></canvas>
+                    </div>
+                </div>
+                                                                `);
+        // document.body.appendChild(card);
+
+        $('#sw1').change(function () {
+        $.ajax({
+            async: false,
+            url: 'sf_backend.php?q=' + sw1.checked + '&type=ap_sw&vid=BENCHMARK',
+            type: 'get',
+            data: {},
+        })
+    });
+    // Debug Switch
+    $('#sw2').change(function () {
+        $.ajax({
+            async: false,
+            url: 'sf_backend.php?q=' + sw2.checked + '&type=ap_sw&vid=DEBUG',
+            type: 'get',
+            data: {},
+        })
+    });
+    }
+
+</script>
