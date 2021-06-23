@@ -185,25 +185,39 @@
         const graph2 = document.querySelector('#graph2');
         const report = document.querySelector('#report');
         let infoTitle = []; 
-        let infoValues = []; 
+        let infoinfo = []; 
+        let topProducts = [];
+        let topProducts2 = [];
         //status new users chats feedbacks
         let text = "The argument in favor of using filler text goes something like this: If you use real content in the design process, anytime you reach a review";
-        infoTitle[0] = 'Status';
-        infoTitle[1] = 'New users';
-        infoTitle[2] = 'Chats';
-        infoTitle[3] = 'Feedbacks';
-        infoValues[0] = 145;
-        infoValues[1] = 258;
-        infoValues[2] = 441;
-        infoValues[3] = 224;
+        
+        
+        infoTitle[0] = ['Status', '145'];
+        infoTitle[1] = ['New users', '258'];
+        infoTitle[2] = ['Chats', '441'];
+        infoTitle[3] = ['Feedbacks', '224'];
+
+        topProducts[0] = ['Jacob', 'Photoshop', '28.76', 'danger', 'down','Pending', 'danger'];
+        topProducts[1] = ['Messy', 'Flash', '21.06', 'danger', 'down', 'In progress', 'warning'];
+        topProducts[2] = ['John', 'Premier', '35.00', 'danger', 'down','Fixed', 'info'];
+        topProducts[3] = ['Peter', 'After effects', '82.00', 'success','up', 'Completed', 'success'];
+        topProducts[4] = ['Dave', '53275535', '98.05', 'success', 'up', 'In progress', 'warning'];
+
+        topProducts2[0] = ['Andrew', 'Adobe XD', '25.76', 'success', 'up','Completed', 'success'];
+        topProducts2[1] = ['Jason', 'Flash', '21.06', 'danger', 'down', 'In progress', 'warning'];
+        topProducts2[2] = ['Luis', 'MCH', '35.00', 'danger', 'down','Fixed', 'info'];
+        topProducts2[3] = ['Dave', 'Before effects', '82.00', 'success', 'up', 'Completed', 'success'];
+        topProducts2[4] = ['Peter', 'Master Class', '98.05', 'success', 'up', 'In progress', 'warning'];
+
+
         addSquare(1, 1, list, "MCH", "558", 10, 20, 'success');
         addSquare(1, 2, list, "MCH", "111", 25, 15, 'danger');
         addSquare(1, 3, list, "My Community Homes", "3214", 12, 10, 'danger');
         addSquare(1, 4, list, "My Home", "1123", 25, 10, 'success');
         addSalesDetails(1, 2, graph);
-        addGraph(1, 1, graph, text, infoTitle, infoValues);
-        addTopProducts(1, 1, graph2);
-        addTopProducts(1, 2, graph2);
+        addGraph(1, 1, graph, text, infoTitle, infoinfo[1]);
+        addTopProducts(1, 1, graph2, topProducts);
+        addTopProducts(1, 2, graph2, topProducts2);
         addReport(1, 1, report);
         console.log('position: ', list);
 
@@ -230,32 +244,32 @@
         container.children[index].appendChild(card);
     };
 
-    const addGraph = (x, y, container, text="Default text", info = new Array('4') , values = new Array(4)) => {
+    const addGraph = (x, y, container, text="Default text", info = new Array([])) => {
         y = y > 2 ? 2 : y;
         const index = y - 1;
-        if (typeof info[0] === 'undefined' || info[0] === null) {
-            info[0] = 'default1';
+        if (typeof info[0][0] === 'undefined' || info[0][0] === null) {
+            info[0][0] = 'default1';
         }
-        if (typeof info[1] === 'undefined' || info[1] === null) {
-            info[1] = 'default2';
+        if (typeof info[1][0] === 'undefined' || info[1][0] === null) {
+            info[1][0] = 'default2';
         }
-        if (typeof info[2] === 'undefined' || info[2] === null) {
-            info[2] = 'default3';
+        if (typeof info[2][0] === 'undefined' || info[2][0] === null) {
+            info[2][0] = 'default3';
         }
-        if (typeof info[3] === 'undefined' || info[3] === null) {
-            info[3] = 'default4';
+        if (typeof info[3][0] === 'undefined' || info[3][0] === null) {
+            info[3][0] = 'default4';
         }
-        if (typeof values[0] === 'undefined' || values[0] === null) {
-            values[0] = '0';
+        if (typeof info[0][1] === 'undefined' || info[0][1] === null) {
+            info[0][1] = '0';
         }
-        if (typeof values[1] === 'undefined' || values[1] === null) {
-            values[1] = '0';
+        if (typeof info[1][1] === 'undefined' || info[1][1] === null) {
+            info[1][1] = '0';
         }
-        if (typeof values[2] === 'undefined' || values[2] === null) {
-            values[2] = '0';
+        if (typeof info[2][1] === 'undefined' || info[2][1] === null) {
+            info[2][1] = '0';
         }
-        if (typeof values[3] === 'undefined' || values[3] === null) {
-            values[3] = '0';
+        if (typeof info[3][1] === 'undefined' || info[3][1] === null) {
+            info[3][1] = '0';
         }
         //status new users chats feedbacks
         let card = document.createRange().createContextualFragment(`
@@ -266,20 +280,20 @@
                     <p class="text-muted font-weight-light text-left">${text}</p>
                     <div class="d-flex flex-wrap mb-5">
                         <div class="mr-5 mt-3">
-                            <p class="text-muted">${info[0]}</p>
-                            <h4>${values[0]}</h4>
+                            <p class="text-muted">${info[0][0]}</p>
+                            <h4>${info[0][1]}</h4>
                         </div>
                         <div class="mr-5 mt-3">
-                            <p class="text-muted">${info[1]}</p>
-                            <h4>${values[1]}</h4>
+                            <p class="text-muted">${info[1][0]}</p>
+                            <h4>${info[1][1]}</h4>
                         </div>
                         <div class="mr-5 mt-3">
-                            <p class="text-muted">${info[2]}</p>
-                            <h4>${values[2]}</h4>
+                            <p class="text-muted">${info[2][0]}</p>
+                            <h4>${info[2][1]}</h4>
                         </div>
                         <div class="mt-3">
-                            <p class="text-muted">${info[3]}</p>
-                            <h4>${values[3]}</h34>
+                            <p class="text-muted">${info[3][0]}</p>
+                            <h4>${info[3][1]}</h34>
                         </div>
                     </div>
                 </div>
@@ -326,7 +340,7 @@
         renderSales('salesDetails');
     }
 
-    const addTopProducts = (x, y, container) => {
+    const addTopProducts = (x, y, container, topProducts) => {
         y = y > 2 ? 2 : y;
         const index = y - 1;
         let card = document.createRange().createContextualFragment(`
@@ -345,40 +359,34 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Jacob</td>
-                        <td>Photoshop</td>
-                        <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
-                        <td><label class="badge badge-danger">Pending</label></td>
+                        <td>${topProducts[0][0]}</td>
+                        <td>${topProducts[0][1]}</td>
+                        <td class="text-${topProducts[0][3]}"> ${topProducts[0][2]}% <i class="ti-arrow-${topProducts[0][4]}"></i></td>
+                        <td><label class="badge badge-${topProducts[0][6]}">${topProducts[0][5]}</label></td>
                     </tr>
                     <tr>
-                        <td>Messsy</td>
-                        <td>Flash</td>
-                        <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
-                        <td><label class="badge badge-warning">In progress</label></td>
+                        <td>${topProducts[1][0]}</td>
+                        <td>${topProducts[1][1]}</td>
+                        <td class="text-${topProducts[1][3]}"> ${topProducts[1][2]}% <i class="ti-arrow-${topProducts[1][4]}"></i></td>
+                        <td><label class="badge badge-${topProducts[1][6]}">${topProducts[1][5]}</label></td>
                     </tr>
                     <tr>
-                        <td>John</td>
-                        <td>Premier</td>
-                        <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
-                        <td><label class="badge badge-info">Fixed</label></td>
+                        <td>${topProducts[2][0]}</td>
+                        <td>${topProducts[2][1]}</td>
+                        <td class="text-${topProducts[2][3]}"> ${topProducts[2][2]}% <i class="ti-arrow-${topProducts[2][4]}"></i></td>
+                        <td><label class="badge badge-${topProducts[2][6]}">${topProducts[2][5]}</label></td>
                     </tr>
                     <tr>
-                        <td>Peter</td>
-                        <td>After effects</td>
-                        <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
-                        <td><label class="badge badge-success">Completed</label></td>
+                        <td>${topProducts[3][0]}</td>
+                        <td>${topProducts[3][1]}</td>
+                        <td class="text-${topProducts[3][3]}"> ${topProducts[3][2]}% <i class="ti-arrow-${topProducts[3][4]}"></i></td>
+                        <td><label class="badge badge-${topProducts[3][6]}">${topProducts[3][5]}</label></td>
                     </tr>
                     <tr>
-                        <td>Dave</td>
-                        <td>53275535</td>
-                        <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
-                        <td><label class="badge badge-warning">In progress</label></td>
-                    </tr>
-                    <tr>
-                        <td>Messsy</td>
-                        <td>Flash</td>
-                        <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
-                        <td><label class="badge badge-info">Fixed</label></td>
+                        <td>${topProducts[4][0]}</td>
+                        <td>${topProducts[4][1]}</td>
+                        <td class="text-${topProducts[4][3]}"> ${topProducts[4][2]}% <i class="ti-arrow-${topProducts[4][4]}"></i></td>
+                        <td><label class="badge badge-${topProducts[4][6]}">${topProducts[4][5]}</label></td>
                     </tr>
                     </tbody>
                 </table>
