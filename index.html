@@ -77,7 +77,7 @@
         }
 
         .mytable-head {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             margin-bottom: 0;
             padding-bottom: 0;
         }
@@ -87,7 +87,6 @@
         }
 
         .mytable-body {
-            border: 1px solid black;
             border-top: 0;
             margin-top: 0;
             padding-top: 0;
@@ -96,68 +95,133 @@
         }
 
         .mytable-body td {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             border-top: 0;
         }
 
         .mytable-footer {
-            border: 1px solid black;
             border-top: 0;
             margin-top: 0;
             padding-top: 0;
         }
 
         .mytable-footer td {
-            border: 1px solid black;
             border-top: 0;
         }
 
         .report {
             width: 510px;
             height: 170px;
-            border: 1px solid black;
             margin: auto;
         }
 
         .graph {
             width: 340px;
             height: 170px;
-            border: 1px solid black;
             margin: auto;
         }
 
         .square {
             width: 170px;
             height: 170px;
-            border: 1px solid black;
             margin: auto;
         }
 
         .card {
-            margin-left: 10px !important;
+            /* margin-left: 10px !important; */
+            margin: auto !important;
         }
 
         tr {
             min-height: 150px;
+        }
+
+        .center-content {
+            text-align: center;
+            /* align-items: center; */
         }
     </style>
 </head>
 
 <body>
     <table class="mytable mytable-head">
-        <tr id="list">
+        <tr id="list" align="center">
             <td width="25%"></td>
             <td width="25%"></td>
             <td width="25%"></td>
             <td width="25%"></td>
         </tr>
     </table>
+    <table class="mytable mytable-body">
+        <tr id="graph1" align="center">
+            <td width="50%">
+            </td>
+            <td width="50%">
+            </td>
+        </tr>
+    </table>
+    <table class="mytable mytable-body">
+        <tr id="graph2" align="center">
+            <td width="50%"></td>
+            <td width="50%"></td>
+        </tr>
+    </table>
+    <table class="mytable mytable-body">
+        <tr id="report" align="center">
+            <td width="100%"></td>
+        </tr>
+    </table>
+</body>
 
+</html>
 
-    
+<script>
+    window.onload = () => {
+        console.log('onload');
+        const list = document.querySelector('#list');
+        const graph = document.querySelector('#graph1');
+        const graph2 = document.querySelector('#graph2');
+        const report = document.querySelector('#report');
+        addSquare(1, 1, list, "MCH", "3458", 10, 11, 'success');
+        addSquare(1, 2, list, "MCH", "111", 25, 10, 'danger');
+        addSquare(1, 3, list, "My Community Homes", "3214", 12, 10, 'danger');
+        addSquare(1, 4, list, "My Home", "1123", 25, 10, 'success');
+        addSalesDetails(1, 2, graph);
+        addGraph(1, 1, graph);
+        addTopProducts(1, 1, graph2);
+        addTopProducts(1, 2, graph2);
+        addReport(1, 1, report);
+        console.log('position: ', list);
 
-    <div id="grafico">
-        <div class="col-md-8 grid-margin stretch-card">
+        renderReport('graphReport')
+    }
+
+    const addSquare = (x, y, container, title = "Title", subtitle = "Subtitle", numberPercentage = 0, numberDays = 0, type = 'success') => {
+        y = y > 4 ? 4 : y;
+        const index = y - 1;
+        const className = type == 'success' ? 'text-success' : 'text-danger';
+        let card = document.createRange().createContextualFragment(`
+            <div class="col-md-8 grid-margin stretch-card mt-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title text-md-center text-xl-left">${title}</p>
+                        <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                            <h4 class="mb-1 mb-md-2 mb-xl-0 order-md-1 order-xl-0">${subtitle}</h4>
+                            <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                        </div>
+                        <p class="mb-0 mt-2 ${className} text-left" >${numberPercentage}% <span class="text-black ml-1"><small>(${numberDays}days)</small></span></p>
+                    </div>
+                </div>
+            </div>
+        `);
+        container.children[index].appendChild(card);
+    };
+
+    const addGraph = (x, y, container) => {
+        y = y > 2 ? 2 : y;
+        const index = y - 1;
+        let card = document.createRange().createContextualFragment(`
+        <div class="col-md-10 grid-margin stretch-card mt-5">
             <div class="card border-bottom-0">
                 <div class="card-body pb-0">
                     <p class="card-title">Purchases</p>
@@ -167,391 +231,148 @@
                     <div class="d-flex flex-wrap mb-5">
                         <div class="mr-5 mt-3">
                             <p class="text-muted">Status</p>
-                            <h3>362</h3>
+                            <h4>362</h4>
                         </div>
                         <div class="mr-5 mt-3">
                             <p class="text-muted">New users</p>
-                            <h3>187</h3>
+                            <h4>187</h4>
                         </div>
                         <div class="mr-5 mt-3">
                             <p class="text-muted">Chats</p>
-                            <h3>524</h3>
+                            <h4>524</h4>
                         </div>
                         <div class="mt-3">
                             <p class="text-muted">Feedbacks</p>
-                            <h3 id="feedbacksValue">1000</h3>
+                            <h4>509</h34>
                         </div>
                     </div>
                 </div>
-                <canvas id="order-chart" class="w-100 chartjs-render-monitor"></canvas>
+                <canvas id="graphSuccess" class="w-80 chartjs-render-monitor"></canvas>
             </div>
-        </div>
-    </div>
-    <table class="mytable mytable-body">
-        <tr id="graph1">
-            <td width="50%">
-                
-
-                <div class="col-md-8 grid-margin stretch-card">
-                    <div class="card border-bottom-0">
-                        <div class="card-body pb-0">
-                            <p class="card-title">Purchases</p>
-                            <p class="text-muted font-weight-light">The argument in favor of using filler text
-                                goes something like this: If you use real content in the design process, anytime
-                                you reach a review</p>
-                            <div class="d-flex flex-wrap mb-5">
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Status</p>
-                                    <h3>362</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">New users</p>
-                                    <h3>187</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Chats</p>
-                                    <h3>524</h3>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="text-muted">Feedbacks</p>
-                                    <h3>1500</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <canvas id="graphSuccess" class="w-100"></canvas>
-                    </div>
-                </div>
-            </td>
-            <td width="50%">
-                <div class="col-md-8 grid-margin stretch-card">
-                    <div class="card border-bottom-0">
-                        <div class="card-body pb-0">
-                            <p class="card-title">Purchases</p>
-                            <p class="text-muted font-weight-light">The argument in favor of using filler text
-                                goes something like this: If you use real content in the design process, anytime
-                                you reach a review</p>
-                            <div class="d-flex flex-wrap mb-5">
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Status</p>
-                                    <h3>362</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">New users</p>
-                                    <h3>187</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Chats</p>
-                                    <h3>524</h3>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="text-muted">Feedbacks</p>
-                                    <h3>509</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <canvas id="order-charts" class="w-100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table class="mytable mytable-body">
-        <tr id="graph2">
-            <td width="50%"></td>
-            <td width="50%"></td>
-        </tr>
-    </table>
-    <table class="mytable mytable-body">
-        <tr id="report">
-            <td width="100%"></td>
-        </tr>
-    </table>
-    <!-- <div class="contaier-fluid page-body-wrapper">
-        <div class="main-panel">
-            <div class="row">
-                <div class="col-md-2 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title text-md-center text-xl-left">Competitor Properties</p>
-                            <div
-                                class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">7,924</h3>
-                                <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                            </div>
-                            <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30
-                                        days)</small></span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title text-md-center text-xl-left">Avg SqFt</p>
-                            <div
-                                class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">1,082.5</h3>
-                                <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                            </div>
-                            <p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30
-                                        days)</small></span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title text-md-center text-xl-left">Avg # Bedrooms</p>
-                            <div
-                                class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">3.3</h3>
-                                <i class="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                            </div>
-                            <p class="mb-0 mt-2 text-success">64.00%<span class="text-black ml-1"><small>(30
-                                        days)</small></span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title text-md-center text-xl-left">Avg Rental Price</p>
-                            <div
-                                class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">$ 2,065</h3>
-                                <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                            </div>
-                            <p class="mb-0 mt-2 text-success">23.00%<span class="text-black ml-1"><small>(30
-                                        days)</small></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</body>
-
-</html>
-
-<script>
-    $('#sw1').change(function () {
-        $.ajax({
-            async: false,
-            url: 'sf_backend.php?q=' + sw1.checked + '&type=ap_sw&vid=BENCHMARK',
-            type: 'get',
-            data: {},
-        })
-    });
-    // Debug Switch
-    $('#sw2').change(function () {
-        $.ajax({
-            async: false,
-            url: 'sf_backend.php?q=' + sw2.checked + '&type=ap_sw&vid=DEBUG',
-            type: 'get',
-            data: {},
-        })
-    });
-</script>
-<script>
-    window.onload = () => {
-
-
-        const dataGraph =  {cv1:[10, 50, 200, 80, 40, 60, 60], cv2: [175, 145, 80, 130, 240, 160, 120]}
-        renderGraph(dataGraph, 'graphSuccess')
-
-
-        console.log('onload');
-        const list = document.querySelector('#list');
-        const graph = document.querySelector('#graph1');
-        const graph2 = document.querySelector('#graph2');
-        const report = document.querySelector('#report');
-        document.getElementById('feedbacksValue').innerHTML = 'qqq';
-        console.log('list.childElementCount: ', list.childElementCount);
-        console.log('graph.childElementCount: ', graph.childElementCount);
-        console.log('report.childElementCount: ', report.childElementCount);
-        // addSquare(1, 4, list, "Competitor Properties", "7958");
-        setTimeout(() => {
-            addGraph(1, 1, graph);
-        }, 5000)
-        // addSquare(1, 1, list);
-        // addGraph(1,1, graph2);
-        // addGraph(1,2, graph2);
-        // addReport(1,1, report);
-        console.log('position: ', list);
-
-    }
-
-    const renderGraph = (dataGraph, containerId) =>{
-
-        if ($(`#${containerId}`).length) {
-      var areaData = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-        datasets: [
-          {
-            data: dataGraph.cv1,
-            backgroundColor: [
-              'rgba(255, 100, 2, .8)'
-            ],
-            borderColor: [
-              'transparent'
-            ],
-            borderWidth:3,
-            fill: 'origin',
-            label: "services"
-          },
-          {
-            data: dataGraph.cv2,
-            backgroundColor: [
-              'rgba(245, 166, 35, 1)'
-            ],
-            borderColor: [
-              'transparent'
-            ],
-            borderWidth:3,
-            fill: 'origin',
-            label: "purchases"
-          }
-        ]
-      };
-      var areaOptions = {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-          filler: {
-            propagate: false
-          }
-        },
-        scales: {
-          xAxes: [{
-            display: false,
-            ticks: {
-              display: true
-            },
-            gridLines: {
-              display: false,
-              drawBorder: false,
-              color: 'transparent',
-              zeroLineColor: '#eeeeee'
-            }
-          }],
-          yAxes: [{
-            display: false,
-            ticks: {
-              display: true,
-              autoSkip: false,
-              maxRotation: 0,
-              stepSize: 100,
-              min: 0,
-              max: 260
-            },
-            gridLines: {
-              drawBorder: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        tooltips: {
-          enabled: true
-        },
-        elements: {
-          line: {
-            tension: .45
-          },
-          point: {
-            radius: 0
-          }
-        }
-      }
-      var salesChartCanvas = $(`#${containerId}`).get(0).getContext("2d");
-      var salesChart = new Chart(salesChartCanvas, {
-        type: 'line',
-        data: areaData,
-        options: areaOptions
-      });
-    }
-
-
-    }
-
-
-    //EL X Sería la posición de ubicación.
-    const addSquare = (x, y, container, title = "Title", subtitle = "Subtitle") => {
-        // const row = document.createElement("div");
-        // const stretchCard = document.createElement("div");
-        // const card = document.createElement("div");
-        // const textPar = document.createElement("p");
-        // // const content 
-        // div.className = "square";
-
-        y = y > 4 ? 4 : y;
-        const index = y - 1;
-        let card = document.createRange().createContextualFragment(`<div class="card">
-                                                                            <div class="card-body">
-                                                                                <p class="card-title text-md-center text-xl-left">${title}</p>
-                                                                                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                                                                                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">${subtitle}</h3>
-                                                                                    <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                                                                                </div>
-                                                                                <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30days)</small></span></p>
-                                                                            </div>
-                                                                        </div>
-                                                                    `);
+        </div>              
+        `);
         container.children[index].appendChild(card);
-    };
+        renderGraph('graphSuccess');
+    }
 
-    const addGraph = (x, y, container) => {
-        // const div = document.createElement("div");
-        // div.className = "graph";
+    const addSalesDetails = (x, y, container) => {
         y = y > 2 ? 2 : y;
         const index = y - 1;
         let card = document.createRange().createContextualFragment(`
-        <td width="50%">
-            <div class="col-md-8 grid-margin stretch-card">
-                                                                        <div class="card border-bottom-0">
-                                                                            <div class="card-body pb-0">
-                                                                                <p class="card-title">Purchases</p>
-                                                                                <p class="text-muted font-weight-light">The argument in favor of using filler text
-                                                                                    goes something like this: If you use real content in the design process, anytime
-                                                                                    you reach a review</p>
-                                                                                <div class="d-flex flex-wrap mb-5">
-                                                                                    <div class="mr-5 mt-3">
-                                                                                        <p class="text-muted">Status</p>
-                                                                                        <h3>362</h3>
-                                                                                    </div>
-                                                                                    <div class="mr-5 mt-3">
-                                                                                        <p class="text-muted">New users</p>
-                                                                                        <h3>187</h3>
-                                                                                    </div>
-                                                                                    <div class="mr-5 mt-3">
-                                                                                        <p class="text-muted">Chats</p>
-                                                                                        <h3>524</h3>
-                                                                                    </div>
-                                                                                    <div class="mt-3">
-                                                                                        <p class="text-muted">Feedbacks</p>
-                                                                                        <h3>509</h3>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <canvas id="order-chart" class="w-100 chartjs-render-monitor"></canvas>
-                                                                        </div>
-                                                                    </div>        
-        </td>
-                                                                    
-                                                                `);
+        <div class="col-md-9 grid-margin stretch-card mt-5">
+            <div class="card">
+            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <p class="card-title">Sales details</p>
+                <p class="text-muted font-weight-light">Received overcame oh sensible so at an. Formed do change merely to county it. Am separate contempt domestic to to oh. On relation my so addition branched.</p>
+                <div id="sales-legend" class="chartjs-legend mt-4 mb-2"><ul class="1-legend"><li><span style="background-color:#8EB0FF"></span>TRI</li><li><span style="background-color:#316FFF"></span>IHS</li><li><span style="background-color:#DDDDDD"></span>FKH</li></ul></div>
+                <canvas id="salesDetails" width="504" height="252" style="display: block; width: 504px; height: 252px;" class="chartjs-render-monitor"></canvas>
+            </div>
+            <div class="card border-right-0 border-left-0 border-bottom-0">
+                <div class="d-flex justify-content-center justify-content-md-end">
+                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                    <button class="btn btn-lg btn-outline-light dropdown-toggle rounded-0 border-top-0 border-bottom-0" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Today
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                    <a class="dropdown-item" href="#">January - March</a>
+                    <a class="dropdown-item" href="#">March - June</a>
+                    <a class="dropdown-item" href="#">June - August</a>
+                    <a class="dropdown-item" href="#">August - November</a>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        `);
+        container.children[index].appendChild(card);
+        renderSales('salesDetails');
+    }
+
+    const addTopProducts = (x, y, container) => {
+        y = y > 2 ? 2 : y;
+        const index = y - 1;
+        let card = document.createRange().createContextualFragment(`
+        <div class="col-md-10 grid-margin stretch-card " >
+            <div class="card border-bottom-0">
+            <div class="card-body ">
+                <p class="card-title mb-0">Top Products</p>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Sale</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Photoshop</td>
+                        <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
+                        <td><label class="badge badge-danger">Pending</label></td>
+                    </tr>
+                    <tr>
+                        <td>Messsy</td>
+                        <td>Flash</td>
+                        <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                        <td><label class="badge badge-warning">In progress</label></td>
+                    </tr>
+                    <tr>
+                        <td>John</td>
+                        <td>Premier</td>
+                        <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
+                        <td><label class="badge badge-info">Fixed</label></td>
+                    </tr>
+                    <tr>
+                        <td>Peter</td>
+                        <td>After effects</td>
+                        <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
+                        <td><label class="badge badge-success">Completed</label></td>
+                    </tr>
+                    <tr>
+                        <td>Dave</td>
+                        <td>53275535</td>
+                        <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
+                        <td><label class="badge badge-warning">In progress</label></td>
+                    </tr>
+                    <tr>
+                        <td>Messsy</td>
+                        <td>Flash</td>
+                        <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                        <td><label class="badge badge-info">Fixed</label></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        `);
         container.children[index].appendChild(card);
     }
 
     const addReport = (x, y, container) => {
         y = y > 1 ? 1 : y;
         const index = y - 1;
-        let card = document.createRange().createContextualFragment(`<div class="col-md-12 col-xl-9">
+        let card = document.createRange().createContextualFragment(`
+        <div class="col-md-8 grid-margin stretch-card">
+              <div class="card position-relative">
+                <div class="card-body">
+                  <p class="card-title">Detailed Reports</p>
+                  <div class="row">
+                    <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-center">
+                      <div class="ml-xl-4">
+                        <h3>33500</h3>
+                        <h3 class="font-weight-light mb-xl-4">Sales</h3>
+                        <p class="text-muted mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                      </div>  
+                    </div>
+                    <div class="col-md-12 col-xl-9">
                       <div class="row">
                         <div class="col-md-6 mt-3 col-xl-5"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                          <canvas id="north-america-chart" width="636" height="318" style="display: block; height: 159px; width: 318px;" class="chartjs-render-monitor"></canvas>
+                          <canvas id="graphReport" width="526" height="263" style="display: block; width: 526px; height: 263px;" class="chartjs-render-monitor"></canvas>
                           <div id="north-america-legend"><div class="report-chart"><div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: #71c016"></div><p class="mb-0">Offline sales</p></div><p class="mb-0">22789</p></div><div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: #8caaff"></div><p class="mb-0">Online sales</p></div><p class="mb-0">94678</p></div><div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: #248afd"></div><p class="mb-0">Returns</p></div><p class="mb-0">12097</p></div></div></div>
                         </div>
                         <div class="col-md-6 col-xl-7">
@@ -615,12 +436,276 @@
                           </div>
                         </div>
                       </div>
-                    </div>`
-        );
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        `);
         container.children[index].appendChild(card);
     }
+    const renderGraph = (containerId) => {
+        if ($(`#${containerId}`).length) {
+            var areaData = {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [
+                    {
+                        data: [175, 200, 130, 210, 40, 60, 25],
+                        backgroundColor: [
+                            'rgba(255, 193, 2, .8)'
+                        ],
+                        borderColor: [
+                            'transparent'
+                        ],
+                        borderWidth: 3,
+                        fill: 'origin',
+                        label: "services"
+                    },
+                    {
+                        data: [175, 145, 190, 130, 240, 160, 200],
+                        backgroundColor: [
+                            'rgba(245, 166, 35, 1)'
+                        ],
+                        borderColor: [
+                            'transparent'
+                        ],
+                        borderWidth: 3,
+                        fill: 'origin',
+                        label: "purchases"
+                    }
+                ]
+            };
+            var areaOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    filler: {
+                        propagate: false
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        ticks: {
+                            display: true
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false,
+                            color: 'transparent',
+                            zeroLineColor: '#eeeeee'
+                        }
+                    }],
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            display: true,
+                            autoSkip: false,
+                            maxRotation: 0,
+                            stepSize: 100,
+                            min: 0,
+                            max: 260
+                        },
+                        gridLines: {
+                            drawBorder: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: true
+                },
+                elements: {
+                    line: {
+                        tension: .45
+                    },
+                    point: {
+                        radius: 0
+                    }
+                }
+            }
+            var salesChartCanvas = $(`#${containerId}`).get(0).getContext("2d");
+            var salesChart = new Chart(salesChartCanvas, {
+                type: 'line',
+                data: areaData,
+                options: areaOptions
+            });
+        }
+    }
 
+    const renderReport = (container) => {
+        if ($(`#${container}`).length) {
+            var areaData = {
+                labels: ["Jan", "Feb", "Mar"],
+                datasets: [{
+                    data: [100, 50, 50],
+                    backgroundColor: [
+                        "#71c016", "#8caaff", "#248afd",
+                    ],
+                    borderColor: "rgba(0,0,0,0)"
+                }
+                ]
+            };
+            var areaOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                segmentShowStroke: false,
+                cutoutPercentage: 78,
+                elements: {
+                    arc: {
+                        borderWidth: 4
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: true
+                },
+                legendCallback: function (chart) {
+                    var text = [];
+                    text.push('<div class="report-chart">');
+                    text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[0] + '"></div><p class="mb-0">Offline sales</p></div>');
+                    text.push('<p class="mb-0">22789</p>');
+                    text.push('</div>');
+                    text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[1] + '"></div><p class="mb-0">Online sales</p></div>');
+                    text.push('<p class="mb-0">94678</p>');
+                    text.push('</div>');
+                    text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[2] + '"></div><p class="mb-0">Returns</p></div>');
+                    text.push('<p class="mb-0">12097</p>');
+                    text.push('</div>');
+                    text.push('</div>');
+                    return text.join("");
+                },
+            }
+            var northAmericaChartPlugins = {
+                beforeDraw: function (chart) {
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctx = chart.chart.ctx;
 
+                    ctx.restore();
+                    var fontSize = 3.125;
+                    ctx.font = "600 " + fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+                    ctx.fillStyle = "#000";
+
+                    var text = "63",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                }
+            }
+            var northAmericaChartCanvas = $(`#${container}`).get(0).getContext("2d");
+            var northAmericaChart = new Chart(northAmericaChartCanvas, {
+                type: 'doughnut',
+                data: areaData,
+                options: areaOptions,
+                plugins: northAmericaChartPlugins
+            });
+            document.getElementById('north-america-legend').innerHTML = northAmericaChart.generateLegend();
+        }
+    }
+
+    const renderSales = (containerId) => {
+        if ($(`#${containerId}`).length) {
+            var SalesChartCanvas = $(`#${containerId}`).get(0).getContext("2d");
+            var SalesChart = new Chart(SalesChartCanvas, {
+                type: 'bar',
+                data: {
+                    labels: [d1, d2, d3],
+                    datasets: [
+                        {
+                            label: ps1[0][0],
+                            data: [ps1[0][1], ps2[0][1], ps3[0][1]],
+                            backgroundColor: '#8EB0FF'
+                        },
+                        {
+                            label: ps1[1][0],
+                            data: [ps1[1][1], ps2[1][1], ps3[1][1]],
+                            backgroundColor: '#316FFF'
+                        },
+                        {
+                            label: ps1[2][0],
+                            data: [ps1[2][1], ps2[2][1], ps3[2][1]],
+                            backgroundColor: '#DDDDDD'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 20,
+                            bottom: 0
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                display: false,
+                                min: 0,
+                                max: 500
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: false,
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: "#9fa0a2"
+                            },
+                            gridLines: {
+                                color: "rgba(0, 0, 0, 0)",
+                                display: false
+                            },
+                            barPercentage: 1
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+                },
+            });
+            document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
+        }
+    }
+</script>
+
+<script>
+    $('#sw1').change(function () {
+        $.ajax({
+            async: false,
+            url: 'sf_backend.php?q=' + sw1.checked + '&type=ap_sw&vid=BENCHMARK',
+            type: 'get',
+            data: {},
+        })
+    });
+    // Debug Switch
+    $('#sw2').change(function () {
+        $.ajax({
+            async: false,
+            url: 'sf_backend.php?q=' + sw2.checked + '&type=ap_sw&vid=DEBUG',
+            type: 'get',
+            data: {},
+        })
+    });
 </script>
 
 <!-- plugins:js -->
